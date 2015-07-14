@@ -1,6 +1,7 @@
 <?php namespace Zizaco\Confide;
 
 use Illuminate\Contracts\Foundation\Application;
+use Config;
 
 /**
  * A service that abstracts all database interactions that happens
@@ -14,7 +15,7 @@ class EloquentRepository implements RepositoryInterface
     /**
      * Laravel application.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Foundation\Application
      */
     public $app;
 
@@ -30,7 +31,7 @@ class EloquentRepository implements RepositoryInterface
     /**
      * Create a new ConfideRepository
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app Laravel application object
+     * @param \Illuminate\Foundation\Application $app Laravel application object
      */
     public function __construct(Application $app)
     {
@@ -45,7 +46,7 @@ class EloquentRepository implements RepositoryInterface
     public function model()
     {
         if (! $this->model) {
-            $this->model = $this->app->make('config')->get('auth.model');
+            $this->model = Config::get('auth.model');
         }
 
         if ($this->model) {

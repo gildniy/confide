@@ -1,6 +1,7 @@
 <?php namespace Zizaco\Confide;
 
 use Illuminate\Contracts\Foundation\Application;
+use Config;
 
 /**
  * The LoginThrottle is a service that Throttles login after
@@ -15,14 +16,14 @@ class CacheLoginThrottleService implements LoginThrottleServiceInterface
     /**
      * Laravel application.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Foundation\Application
      */
     public $app;
 
     /**
      * Create a new PasswordService.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app Laravel application object.
+     * @param \Illuminate\Foundation\Application $app Laravel application object.
      */
     public function __construct(Application $app)
     {
@@ -59,7 +60,7 @@ class CacheLoginThrottleService implements LoginThrottleServiceInterface
         // Retuns the current count
         $count = $this->countThrottle($identity, 0);
 
-        return $count >= $this->app->make('config')->get('confide::throttle_limit');
+        return $count >= Config::get('confide.throttle_limit');
     }
 
     /**
@@ -104,7 +105,7 @@ class CacheLoginThrottleService implements LoginThrottleServiceInterface
 
         $count = $count + $increments;
 
-        $ttl = $this->app->make('config')->get('confide::throttle_time_period');
+        $ttl = Config::get('confide.throttle_time_period');
 
         $this->app->make('cache')
             ->put('login_throttling:'.md5($identityString), $count, $ttl);

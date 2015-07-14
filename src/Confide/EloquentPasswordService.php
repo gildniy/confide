@@ -2,6 +2,8 @@
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
+use DB;
+use Config;
 
 /**
  * A service that abstracts all user password management related methods.
@@ -14,14 +16,14 @@ class EloquentPasswordService implements PasswordServiceInterface
     /**
      * Laravel application.
      *
-     * @var \Illuminate\Contracts\Foundation\Application
+     * @var \Illuminate\Foundation\Application
      */
     public $app;
 
     /**
      * Create a new PasswordService.
      *
-     * @param \Illuminate\Contracts\Foundation\Application $app Laravel application object
+     * @param \Illuminate\Foundation\Application $app Laravel application object
      */
     public function __construct(Application $app)
     {
@@ -50,8 +52,7 @@ class EloquentPasswordService implements PasswordServiceInterface
 
         $table = $this->getTable();
 
-        $this->app->make('db')
-            ->connection($user->getConnectionName())
+        DB::connection($user->getConnectionName())
             ->table($table)
             ->insert($values);
 
@@ -73,8 +74,7 @@ class EloquentPasswordService implements PasswordServiceInterface
         $connection = $this->getConnection();
         $table = $this->getTable();
 
-        $email = $this->app->make('db')
-            ->connection($connection)
+        $email = DB::connection($connection)
             ->table($table)
             ->select('email')
             ->where('token', '=', $token)
@@ -98,8 +98,7 @@ class EloquentPasswordService implements PasswordServiceInterface
         $connection = $this->getConnection();
         $table = $this->getTable();
 
-        $affected = $this->app->make('db')
-            ->connection($connection)
+        $affected = DB::connection($connection)
             ->table($table)
             ->where('token', '=', $token)
             ->delete();
@@ -127,7 +126,7 @@ class EloquentPasswordService implements PasswordServiceInterface
      */
     protected function getTable()
     {
-        return $this->app->make('config')->get('auth.reminder.table');
+        return Config::get('confide.password_reset_table');
     }
 
     /**
@@ -173,13 +172,13 @@ class EloquentPasswordService implements PasswordServiceInterface
         $lang   = $this->app->make('translator');
 
         $this->app->make('mailer')->queueOn(
-            $config->get('confide::email_queue'),
-            $config->get('confide::email_reset_password'),
+            $config->get('confide.email_queue'),
+            $config->get('confide.email_reset_password'),
             compact('user', 'token'),
             function ($message) use ($user, $token, $lang) {
                 $message
                     ->to($user->email, $user->username)
-                    ->subject($lang->get('confide::confide.email.password_reset.subject'));
+                    ->subject($lang->get('confide.email.password_reset.subject'));
             }
         );
     }
@@ -197,7 +196,7 @@ class EloquentPasswordService implements PasswordServiceInterface
         $config = $this->app->make('config');
 
         return $carbon->now()
-            ->subHours($config->get('confide::confide.password_reset_expiration', 7))
+            ->subHours($config->get('confide.password_reset_expiration', 7))
             ->toDateTimeString();
     }
 }
