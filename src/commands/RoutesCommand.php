@@ -59,7 +59,7 @@ class RoutesCommand extends GenerateCommand
 
         // Prompt
         $this->line('');
-        $this->info("Routes file: app/routes.php");
+        $this->info("Routes file: app/HTTP/routes.php");
 
         $message = $this->getFireMessage($restful);
 
@@ -72,7 +72,7 @@ class RoutesCommand extends GenerateCommand
             $filename = 'routes.php';
             $this->appendInFile($filename, 'generators.routes', $viewVars);
 
-            $this->info("app/routes.php Patched successfully!");
+            $this->info("app/HTTP/routes.php Patched successfully!");
         }
     }
 

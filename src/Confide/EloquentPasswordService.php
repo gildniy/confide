@@ -126,7 +126,7 @@ class EloquentPasswordService implements PasswordServiceInterface
      */
     protected function getTable()
     {
-        return Config::get('confide.password_reset_table');
+        return Config::get('auth.password.table');
     }
 
     /**

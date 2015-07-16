@@ -82,18 +82,6 @@ return array(
     |
     */
     'password_reset_expiration' => 7, // hours
-	
-	/*
-    |--------------------------------------------------------------------------
-    | Password Reset Table
-    |--------------------------------------------------------------------------
-    |
-    | By default a password reminder table is called password_reminders
-    | do not want this to happen, change the line below in the set name for
-    | the reminder table and make it referenced in the variable
-    | "password_reset_table", which can be also changed according to your need.
-    */
-    'password_reset_table' => 'password_reminders',
 
     /*
     |--------------------------------------------------------------------------
