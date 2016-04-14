@@ -1,7 +1,9 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Illuminate\Contracts\Foundation\Application;
+namespace Zizaco\Confide;
+
 use Config;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * The LoginThrottle is a service that Throttles login after
@@ -9,7 +11,6 @@ use Config;
  * order to avoid brute force attacks.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 class CacheLoginThrottleService implements LoginThrottleServiceInterface
 {

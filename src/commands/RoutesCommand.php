@@ -1,7 +1,9 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Zizaco\Confide\Support\GenerateCommand;
+namespace Zizaco\Confide;
+
 use Symfony\Component\Console\Input\InputOption;
+use Zizaco\Confide\Support\GenerateCommand;
 
 /**
  * This command dumps some routes at the end of the routes.php
@@ -9,7 +11,6 @@ use Symfony\Component\Console\Input\InputOption;
  * by the ControllerCommand reachable.
  *
  * @license MIT
- * @package  Zizaco\Confide
  */
 class RoutesCommand extends GenerateCommand
 {
@@ -34,10 +35,10 @@ class RoutesCommand extends GenerateCommand
      */
     protected function getOptions()
     {
-        return array(
-            array('controller', null, InputOption::VALUE_OPTIONAL, 'Name of the controller.', 'UsersController'),
-            array('--restful', '-r', InputOption::VALUE_NONE, 'Generate RESTful controller.'),
-        );
+        return [
+            ['controller', null, InputOption::VALUE_OPTIONAL, 'Name of the controller.', 'UsersController'],
+            ['--restful', '-r', InputOption::VALUE_NONE, 'Generate RESTful controller.'],
+        ];
     }
 
     /**
@@ -59,39 +60,39 @@ class RoutesCommand extends GenerateCommand
 
         // Prompt
         $this->line('');
-        $this->info("Routes file: app/HTTP/routes.php");
+        $this->info('Routes file: app/HTTP/routes.php');
 
         $message = $this->getFireMessage($restful);
 
         $this->comment($message);
         $this->line('');
 
-        if ($this->confirm("Proceed with the append? [Yes|no]")) {
-            $this->info("Appending routes...");
+        if ($this->confirm('Proceed with the append? [Yes|no]')) {
+            $this->info('Appending routes...');
             // Generate
             $filename = 'routes.php';
             $this->appendInFile($filename, 'generators.routes', $viewVars);
 
-            $this->info("app/HTTP/routes.php Patched successfully!");
+            $this->info('app/HTTP/routes.php Patched successfully!');
         }
     }
 
     /**
      * Returns a message that should explain what is about to be done.
      *
-     * @param boolean $restful If the restful option is being used.
+     * @param bool $restful If the restful option is being used.
      *
      * @return string The message.
      */
     protected function getFireMessage($restful = false)
     {
-        if (! $restful) {
-            return "The default Confide routes (to use with the Controller template)".
-            " will be appended to your routes.php file.";
+        if (!$restful) {
+            return 'The default Confide routes (to use with the Controller template)'.
+            ' will be appended to your routes.php file.';
         } else {
-            return "A single route to handle every action in a RESTful controller".
-            " will be appended to your routes.php file. This may be used with a confide".
-            " controller generated using [-r|--restful] option.";
+            return 'A single route to handle every action in a RESTful controller'.
+            ' will be appended to your routes.php file. This may be used with a confide'.
+            ' controller generated using [-r|--restful] option.';
         }
     }
 }

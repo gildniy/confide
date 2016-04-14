@@ -1,15 +1,17 @@
-<?php namespace Zizaco\Confide;
+<?php
 
+namespace Zizaco\Confide;
+
+use Illuminate\Database\Eloquent\Model as Eloquent;
+use Illuminate\Support\Facades\App as App;
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use Zizaco\Confide\Facade as ConfideFacade;
-use Illuminate\Support\Facades\App as App;
-use Illuminate\Database\Eloquent\Model as Eloquent;
 
 class ConfideUserTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -23,7 +25,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->confirmation_code = '12345';
 
         /*
@@ -50,7 +52,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->email = 'someone@somewhere.com';
 
         /*
@@ -77,7 +79,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $validator = m::mock('Zizaco\Confide\Validator');
 
         /*
@@ -108,7 +110,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->exists = true;
         $validator = m::mock('Zizaco\Confide\Validator');
 
@@ -220,7 +222,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $newMessageBag = m::mock('Illuminate\Support\MessageBag');
         $existentMessageBag = m::mock('Illuminate\Support\MessageBag');
         $user->errors = $existentMessageBag;
@@ -277,7 +279,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->password = '1234';
 
         /*
@@ -295,7 +297,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->remember_token = '1234';
 
         /*
@@ -313,7 +315,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->remember_token = null;
 
         /*
@@ -332,7 +334,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
 
         /*
         |------------------------------------------------------------
@@ -349,7 +351,7 @@ class ConfideUserTest extends PHPUnit_Framework_TestCase
         | Set
         |------------------------------------------------------------
         */
-        $user = new _ConfideUserStub;
+        $user = new _ConfideUserStub();
         $user->email = 'someone@somewhere.com';
 
         /*

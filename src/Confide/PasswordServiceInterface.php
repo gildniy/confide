@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -6,7 +8,6 @@ use Illuminate\Contracts\Auth\Authenticatable;
  * A service that abstracts all user password management related methods.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 interface PasswordServiceInterface
 {
@@ -34,7 +35,7 @@ interface PasswordServiceInterface
      *
      * @param string $token
      *
-     * @return boolean Success.
+     * @return bool Success.
      */
     public function destroyToken($token);
 }

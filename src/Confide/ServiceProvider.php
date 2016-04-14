@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider as IlluminateServiceProvider;
@@ -21,13 +23,13 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function boot()
     {
-        $root = __DIR__ . '/../';
+        $root = __DIR__.'/../';
 
         $this->publishes([
-            $root . 'config/config.php' => config_path('confide.php'),
+            $root.'config/config.php' => config_path('confide.php'),
         ]);
-        $this->loadTranslationsFrom($root . 'lang', 'confide');
-        $this->loadViewsFrom($root . 'views', 'confide');
+        $this->loadTranslationsFrom($root.'lang', 'confide');
+        $this->loadViewsFrom($root.'views', 'confide');
 
         $this->commands(
             'command.confide.controller',
@@ -69,7 +71,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
     /**
      * Register the service that abstracts all user password management
-     * related methods
+     * related methods.
      */
     protected function registerPasswordService()
     {
@@ -92,7 +94,7 @@ class ServiceProvider extends IlluminateServiceProvider
 
     /**
      * Register the UserValidator class. The default class that
-     * used for user validation
+     * used for user validation.
      */
     protected function registerUserValidator()
     {
@@ -135,11 +137,11 @@ class ServiceProvider extends IlluminateServiceProvider
     }
 
     /**
-     * Register Config
+     * Register Config.
      */
     public function registerConfig()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'confide');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'confide');
     }
 
     /**
@@ -149,7 +151,7 @@ class ServiceProvider extends IlluminateServiceProvider
      */
     public function provides()
     {
-        return array(
+        return [
             'confide',
             'confide.repository',
             'confide.password',
@@ -157,7 +159,7 @@ class ServiceProvider extends IlluminateServiceProvider
             'confide.user_validator',
             'command.confide.controller',
             'command.confide.routes',
-            'command.confide.migration'
-        );
+            'command.confide.migration',
+        ];
     }
 }

@@ -1,22 +1,22 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class ControllerCommandTest extends PHPUnit_Framework_TestCase
 {
-
     /**
-     * ConfideRepository instance
+     * ConfideRepository instance.
      *
      * @var Zizaco\Confide\ConfideRepository
      */
     protected $repo;
 
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -31,12 +31,12 @@ class ControllerCommandTest extends PHPUnit_Framework_TestCase
         |------------------------------------------------------------
         */
         $config = m::mock('Config');
-        $app = ['config'=>$config];
+        $app = ['config' => $config];
         $command = m::mock('Zizaco\Confide\ControllerCommand', [$app]);
         $options = [
             ['name', null, InputOption::VALUE_OPTIONAL, 'Name of the controller.', 'Users'],
             ['--restful', '-r', InputOption::VALUE_NONE, 'Generate RESTful controller.'],
-            ['username', null, InputOption::VALUE_NONE, 'Includes username as a required parameter.']
+            ['username', null, InputOption::VALUE_NONE, 'Includes username as a required parameter.'],
         ];
 
         /*
@@ -55,15 +55,15 @@ class ControllerCommandTest extends PHPUnit_Framework_TestCase
         |------------------------------------------------------------
         */
         $config = m::mock('Config');
-        $app = ['config'=>$config];
+        $app = ['config' => $config];
         $command = m::mock('Zizaco\Confide\ControllerCommand', [$app]);
         $command->shouldAllowMockingProtectedMethods();
         $viewVars = [
-            'class' => "UsersController",
-            'namespace' => "The\\Namespace",
-            'model' => "User",
-            'restful' => true,
-            'includeUsername' => true
+            'class'           => 'UsersController',
+            'namespace'       => 'The\\Namespace',
+            'model'           => 'User',
+            'restful'         => true,
+            'includeUsername' => true,
         ];
 
         /*

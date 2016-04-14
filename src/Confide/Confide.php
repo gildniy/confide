@@ -1,7 +1,9 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Illuminate\Contracts\Foundation\Application;
+namespace Zizaco\Confide;
+
 use Config;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * This class is the main entry point to use the confide
@@ -9,7 +11,6 @@ use Config;
  * application will interact directly with.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 class Confide
 {
@@ -57,10 +58,10 @@ class Confide
         LoginThrottleServiceInterface $loginThrottler,
         Application $app
     ) {
-        $this->repo           = $repo;
-        $this->passService    = $passService;
+        $this->repo = $repo;
+        $this->passService = $passService;
         $this->loginThrottler = $loginThrottler;
-        $this->app            = $app;
+        $this->app = $app;
     }
 
     /**
@@ -134,7 +135,7 @@ class Confide
         $user = $this->repo->getUserByEmailOrUsername($emailOrUsername);
 
         if ($user) {
-            if (! $user->confirmed && $mustBeConfirmed) {
+            if (!$user->confirmed && $mustBeConfirmed) {
                 return false;
             }
 
@@ -143,11 +144,12 @@ class Confide
                 $user->password
             );
 
-            if (! $correctPassword) {
+            if (!$correctPassword) {
                 return false;
             }
 
             $this->app->make('auth')->login($user, $remember);
+
             return true;
         }
 
@@ -195,7 +197,7 @@ class Confide
      *
      * @param mixed $identity.
      *
-     * @return boolean False if the identity has reached the 'throttle_limit'.
+     * @return bool False if the identity has reached the 'throttle_limit'.
      */
     protected function loginThrottling($identity)
     {
@@ -209,7 +211,7 @@ class Confide
         // Throttling delay!
         // See: http://www.codinghorror.com/blog/2009/01/dictionary-attacks-101.html
         if ($count > 2) {
-            usleep(($count-1) * 400000);
+            usleep(($count - 1) * 400000);
         }
 
         return true;
@@ -220,7 +222,7 @@ class Confide
      *
      * @param mixed $identity The login identity.
      *
-     * @return boolean True if the identity has reached the throttle_limit.
+     * @return bool True if the identity has reached the throttle_limit.
      */
     public function isThrottled($identity)
     {
@@ -252,7 +254,7 @@ class Confide
      *
      * @param string $token Token retrieved from a forgotPassword.
      *
-     * @return boolean Success.
+     * @return bool Success.
      */
     public function destroyForgotPasswordToken($token)
     {
@@ -297,7 +299,7 @@ class Confide
     }
 
     /**
-     * Display the default signup view
+     * Display the default signup view.
      *
      * @return \Illuminate\View\View
      */
@@ -317,7 +319,7 @@ class Confide
     }
 
     /**
-     * Display the forget password view
+     * Display the forget password view.
      *
      * @return \Illuminate\View\View
      */
@@ -325,7 +327,7 @@ class Confide
     {
         return $this->app->make('view')->make(
             Config::get('confide.reset_password_form'),
-            array('token' => $token)
+            ['token' => $token]
         );
     }
 }

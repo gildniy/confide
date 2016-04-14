@@ -1,15 +1,17 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Zizaco\Confide\Facade as ConfideFacade;
+namespace Zizaco\Confide;
+
 use Illuminate\Support\Facades\App as App;
+use Zizaco\Confide\Facade as ConfideFacade;
 
 /**
  * This is a trait containing a initial implementation of the
  * methods declared in the ConfideUserInterface.
  *
  * @see \Zizaco\Confide\ConfideUserInterface
+ *
  * @license MIT
- * @package Zizaco\Confide
  */
 trait ConfideUser
 {
@@ -75,7 +77,7 @@ trait ConfideUser
      *
      * @return bool
      */
-    public function save(array $options = array())
+    public function save(array $options = [])
     {
         if ($this->isValid()) {
             return parent::save($options);

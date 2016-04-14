@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
@@ -6,7 +8,7 @@ use PHPUnit_Framework_TestCase;
 class ServiceProviderTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -398,7 +400,7 @@ class ServiceProviderTest extends PHPUnit_Framework_TestCase
             'confide.user_validator',
             'command.confide.controller',
             'command.confide.routes',
-            'command.confide.migration'
+            'command.confide.migration',
         ];
 
         $sp->shouldReceive('provides')

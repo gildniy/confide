@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Illuminate\Support\Facades\App as App;
 use Illuminate\Support\Facades\Lang as Lang;
@@ -24,8 +26,8 @@ use Illuminate\Support\MessageBag;
  *     App::bind('confide.user_validator', 'MyOwnValidator');
  *
  * @see \Zizaco\Confide\UserValidator
+ *
  * @license MIT
- * @package Zizaco\Confide
  */
 class UserValidator implements UserValidatorInterface
 {
@@ -51,7 +53,7 @@ class UserValidator implements UserValidatorInterface
             'username' => 'alpha_dash',
             'email'    => 'required|email',
             'password' => 'required|min:4',
-        ]
+        ],
     ];
 
     /**
@@ -59,7 +61,7 @@ class UserValidator implements UserValidatorInterface
      *
      * @param ConfideUserInterface $user Instance to be tested.
      *
-     * @return boolean True if the $user is valid.
+     * @return bool True if the $user is valid.
      */
     public function validate(ConfideUserInterface $user, $ruleset = 'create')
     {
@@ -79,7 +81,7 @@ class UserValidator implements UserValidatorInterface
      *
      * @param ConfideUserInterface $user
      *
-     * @return boolean True if password is valid.
+     * @return bool True if password is valid.
      */
     public function validatePassword(ConfideUserInterface $user)
     {
@@ -96,6 +98,7 @@ class UserValidator implements UserValidatorInterface
                     'confide::confide.alerts.password_confirmation',
                     'password_confirmation'
                 );
+
                 return false;
             }
         }
@@ -112,19 +115,18 @@ class UserValidator implements UserValidatorInterface
      *
      * @param ConfideUserInterface $user
      *
-     * @return boolean True if user is unique.
+     * @return bool True if user is unique.
      */
     public function validateIsUnique(ConfideUserInterface $user)
     {
         $identity = [
-            'email' => $user->email,
+            'email'    => $user->email,
             'username' => $user->username,
         ];
 
         $identity = array_filter($identity);
 
         foreach ($identity as $attribute => $value) {
-
             $similar = $this->repo->getUserByIdentity([$attribute => $value]);
 
             if (!$similar || $similar->getKey() == $user->getKey()) {
@@ -136,7 +138,6 @@ class UserValidator implements UserValidatorInterface
                     $attribute
                 );
             }
-
         }
 
         if (empty($identity)) {
@@ -153,7 +154,7 @@ class UserValidator implements UserValidatorInterface
      * @param ConfideUserInterface $user
      * @param string               $ruleset The name of the key in the UserValidator->$rules array
      *
-     * @return boolean True if the attributes are valid.
+     * @return bool True if the attributes are valid.
      */
     public function validateAttributes(ConfideUserInterface $user, $ruleset = 'create')
     {
@@ -170,6 +171,7 @@ class UserValidator implements UserValidatorInterface
         // Validate and attach errors
         if ($validator->fails()) {
             $user->errors = $validator->errors();
+
             return false;
         } else {
             return true;
@@ -188,7 +190,7 @@ class UserValidator implements UserValidatorInterface
     {
         $messageBag = $user->errors;
 
-        if (! $messageBag instanceof MessageBag) {
+        if (!$messageBag instanceof MessageBag) {
             $messageBag = App::make('Illuminate\Support\MessageBag');
         }
 

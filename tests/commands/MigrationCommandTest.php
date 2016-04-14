@@ -1,21 +1,22 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class MigrationCommandTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * ConfideRepository instance
+     * ConfideRepository instance.
      *
      * @var Zizaco\Confide\ConfideRepository
      */
     protected $repo;
 
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -33,7 +34,7 @@ class MigrationCommandTest extends PHPUnit_Framework_TestCase
         $command = m::mock('Zizaco\Confide\MigrationCommand', [$app]);
         $options = [
             ['table', null, InputOption::VALUE_OPTIONAL, 'Table name.', 'users'],
-            ['username', null, InputOption::VALUE_NONE, 'Includes an unique username column.']
+            ['username', null, InputOption::VALUE_NONE, 'Includes an unique username column.'],
         ];
 
         /*
@@ -55,8 +56,8 @@ class MigrationCommandTest extends PHPUnit_Framework_TestCase
         $command = m::mock('Zizaco\Confide\MigrationCommand', [$app]);
         $command->shouldAllowMockingProtectedMethods();
         $viewVars = [
-            'table' => "users",
-            'includeUsername' => true
+            'table'           => 'users',
+            'includeUsername' => true,
         ];
 
         /*

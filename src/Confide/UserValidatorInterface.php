@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 /**
  * Interface that declares the methods that must be
@@ -6,8 +8,8 @@
  * by ConfideUser.
  *
  * @see \Zizaco\Confide\UserValidator
+ *
  * @license MIT
- * @package Zizaco\Confide
  */
 interface UserValidatorInterface
 {
