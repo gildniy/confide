@@ -1,14 +1,15 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Illuminate\Contracts\Foundation\Application;
+namespace Zizaco\Confide;
+
 use Config;
+use Illuminate\Contracts\Foundation\Application;
 
 /**
  * A service that abstracts all database interactions that happens
  * in Confide using Eloquent.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 class EloquentRepository implements RepositoryInterface
 {
@@ -29,7 +30,7 @@ class EloquentRepository implements RepositoryInterface
     public $model;
 
     /**
-     * Create a new ConfideRepository
+     * Create a new ConfideRepository.
      *
      * @param \Illuminate\Foundation\Application $app Laravel application object
      */
@@ -39,13 +40,13 @@ class EloquentRepository implements RepositoryInterface
     }
 
     /**
-     * Returns the model set in auth config
+     * Returns the model set in auth config.
      *
      * @return mixed Instantiated object of the 'auth.model' class
      */
     public function model()
     {
-        if (! $this->model) {
+        if (!$this->model) {
             $this->model = Config::get('auth.model');
         }
 
@@ -53,7 +54,7 @@ class EloquentRepository implements RepositoryInterface
             return $this->app->make($this->model);
         }
 
-        throw new \Exception("Wrong model specified in config/auth.php", 639);
+        throw new \Exception('Wrong model specified in config/auth.php', 639);
     }
 
     /**
@@ -81,7 +82,7 @@ class EloquentRepository implements RepositoryInterface
     }
 
     /**
-     * Find a user by the given email
+     * Find a user by the given email.
      *
      * @param string $email The email to be used in the query
      *
@@ -89,11 +90,11 @@ class EloquentRepository implements RepositoryInterface
      */
     public function getUserByEmail($email)
     {
-        return $this->getUserByIdentity(['email'=>$email]);
+        return $this->getUserByIdentity(['email' => $email]);
     }
 
     /**
-     * Find a user by the given email or username
+     * Find a user by the given email or username.
      *
      * @param string $emailOrUsername Username of email to be used in the query
      *
@@ -102,8 +103,8 @@ class EloquentRepository implements RepositoryInterface
     public function getUserByEmailOrUsername($emailOrUsername)
     {
         $identity = [
-            'email' => $emailOrUsername,
-            'username' => $emailOrUsername
+            'email'    => $emailOrUsername,
+            'username' => $emailOrUsername,
         ];
 
         return $this->getUserByIdentity($identity);

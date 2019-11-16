@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 
@@ -10,8 +12,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
  * methods see ConfideUser trait.
  *
  * @see \Zizaco\Confide\ConfideUser
+ *
  * @license MIT
- * @package Zizaco\Confide
  */
 interface ConfideUserInterface extends Authenticatable
 {

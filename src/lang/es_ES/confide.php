@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     'username'              => 'Usuario',
     'password'              => 'Contraseña',
@@ -8,27 +8,27 @@ return array(
     'e_mail'                => 'Email',
     'username_e_mail'       => 'Usuario o Email',
 
-    'signup' => array(
+    'signup' => [
         'title'                 => 'Registro',
         'desc'                  => 'Registrar una nueva cuenta',
         'confirmation_required' => 'Confirmación requerida',
         'submit'                => 'Crear nueva cuenta',
-    ),
+    ],
 
-    'login' => array(
+    'login' => [
         'title'           => 'Login',
         'desc'            => 'Introduzca sus credenciales',
         'forgot_password' => '(olvidé contraseña)',
         'remember'        => 'Recuerdame',
         'submit'          => 'Login',
-    ),
+    ],
 
-    'forgot' => array(
+    'forgot' => [
         'title'  => 'Olvidé contraseña',
         'submit' => 'Continuar',
-    ),
+    ],
 
-    'alerts' => array(
+    'alerts' => [
         'account_created'        => 'Su cuenta ha sido creada satisfactoriamente.',
         'instructions_sent'      => 'Por favor, compruebe su e-mail para obtener las instrucciones sobre como confirmar su cuenta.',
         'too_many_attempts'      => 'Demasiados intentos. Inténtelo de nuevo en unos minutos.',
@@ -42,22 +42,22 @@ return array(
         'wrong_password_reset'   => 'Contraseña incorrecta. Inténtelo de nuevo.',
         'wrong_token'            => 'La cadena de reseteo de contraseña no es válida.',
         'duplicated_credentials' => 'Los credenciales introducidos están siendo actualmente usados. Inténtelo con información diferente.',
-    ),
+    ],
 
-    'email' => array(
-        'account_confirmation' => array(
+    'email' => [
+        'account_confirmation' => [
             'subject'   => 'Confirmación de cuenta',
             'greetings' => 'Hola :name',
             'body'      => 'Por favor acceda al siguiente enlace para confirmar su cuenta.',
             'farewell'  => 'Saludos',
-        ),
+        ],
 
-        'password_reset' => array(
+        'password_reset' => [
             'subject'   => 'Reestablecer Contraseña',
             'greetings' => 'Hola :name',
             'body'      => 'Acceda al siguiente enlace para cambiar su contraseña',
             'farewell'  => 'Saludos',
-        ),
-    ),
+        ],
+    ],
 
-);
+];

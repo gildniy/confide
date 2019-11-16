@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
@@ -6,7 +8,7 @@ use PHPUnit_Framework_TestCase;
 class EloquentRepositoryTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -95,8 +97,8 @@ class EloquentRepositoryTest extends PHPUnit_Framework_TestCase
         |------------------------------------------------------------
         */
         $identity = [
-            'email' => 'someone@somewhere.com',
-            'something' => 'somevalue'
+            'email'     => 'someone@somewhere.com',
+            'something' => 'somevalue',
         ];
         $model = m::mock('_mockedUser');
         $user = m::mock('_mockedUser');
@@ -123,11 +125,12 @@ class EloquentRepositoryTest extends PHPUnit_Framework_TestCase
 
         // Should call with nested closure containing the above orWhere calls.
         $model->shouldReceive('where')
-            ->with(m::on(function($arg) use ($nestedModel) {
+            ->with(m::on(function ($arg) use ($nestedModel) {
                 if (!is_callable($arg)) {
                     return false;
                 }
                 $arg($nestedModel);
+
                 return true;
             }))
             ->once()
@@ -169,7 +172,7 @@ class EloquentRepositoryTest extends PHPUnit_Framework_TestCase
         */
         // Repo model method should return the model instance
         $repo->shouldReceive('getUserByIdentity')
-            ->with(['email'=>$email])
+            ->with(['email' => $email])
             ->andReturn($user);
 
         /*
@@ -200,7 +203,7 @@ class EloquentRepositoryTest extends PHPUnit_Framework_TestCase
         */
         // Repo model method should return the model instance
         $repo->shouldReceive('getUserByIdentity')
-            ->with(['email'=>$username, 'username'=>$username])
+            ->with(['email' => $username, 'username' => $username])
             ->andReturn($user);
 
         /*

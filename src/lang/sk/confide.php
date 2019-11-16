@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
   'username'                  => 'Užívateľské meno',
   'password'                  => 'Heslo',
@@ -8,27 +8,27 @@ return array(
   'e_mail'                    => 'Email',
   'username_e_mail'           => 'Užívateľské meno alebo Email',
 
-  'signup'  => array(
+  'signup'  => [
     'title'                   => 'Registrovať',
     'desc'                    => 'Vytvoriť nový účet',
     'confirmation_required'   => 'Vyžaduje sa aktivácia účtu emailom',
     'submit'                  => 'Registrovať',
-  ),
+  ],
 
-  'login'   => array(
+  'login'   => [
     'title'                   => 'Prihlásiť sa',
     'desc'                    => 'Zadajte svoje prihlasovacie údaje',
     'forgot_password'         => '(zabudol som heslo)',
     'remember'                => 'Zapamätať prihlásenie',
     'submit'                  => 'Prihlásiť',
-  ),
+  ],
 
-  'forgot'  => array(
+  'forgot'  => [
     'title'                   => 'Zabudnuté heslo',
     'submit'                  => 'Pokračovať',
-  ),
+  ],
 
-  'alerts'  => array(
+  'alerts'  => [
     'account_created'         => 'Váš účet bol úspešne vytvorený.',
     'instructions_sent'       => 'Na email vám boli zaslané inštrukcie na aktiváciu účtu.',
     'too_many_attempts'       => 'Prekročili ste limit pokusov o registráciu. Skúste to opäť o niekoľko minút.',
@@ -42,22 +42,22 @@ return array(
     'wrong_password_reset'    => 'Nesprávne heslo.',
     'wrong_token'             => 'Token potrebný pre obnovenie hesla nie je správny.',
     'duplicated_credentials'  => 'Poskytnuté údaje sa už používajú. Skúste to opäť s inými údajmi.',
-  ),
+  ],
 
-  'email'   => array(
-    'account_confirmation'  => array(
+  'email'   => [
+    'account_confirmation'  => [
       'subject'               => 'Aktivácia účtu',
       'greetings'             => 'Dobrý deň :name,',
       'body'                  => 'Pre aktiváciu účtu, kliknite na nasledujúci odkaz.',
       'farewell'              => 'Prajeme pekný deň',
-    ),
+    ],
 
-    'password_reset'        => array(
+    'password_reset'        => [
       'subject'               => 'Obnovenie hesla',
       'greetings'             => 'Dobrý deň :name,',
       'body'                  => 'Pre obnovenie hesla, kliknite na nasledujúci odkaz.',
       'farewell'              => 'Prajeme pekný deň',
-    ),
-  ),
+    ],
+  ],
 
-);
+];

@@ -1,14 +1,16 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Mockery as m;
-use PHPUnit_Framework_TestCase;
+namespace Zizaco\Confide;
+
 use Illuminate\Support\Facades\App as App;
 use Illuminate\Support\Facades\Lang as Lang;
+use Mockery as m;
+use PHPUnit_Framework_TestCase;
 
 class UserValidatorTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -74,11 +76,11 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
         $validator = m::mock('Zizaco\Confide\UserValidator[attachErrorMsg]');
 
         $userA = m::mock('Zizaco\Confide\ConfideUserInterface');
-        $userA->password              = 'foo123';
+        $userA->password = 'foo123';
         $userA->password_confirmation = 'foo123';
 
         $userB = m::mock('Zizaco\Confide\ConfideUserInterface');
-        $userB->password              = 'foo123';
+        $userB->password = 'foo123';
         $userB->password_confirmation = 'foo456';
 
         $userC = m::mock('Zizaco\Confide\ConfideUserInterface');
@@ -205,13 +207,13 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
         |------------------------------------------------------------
         */
         $laravelValidator = m::mock('Validator');
-        $errorBag         = m::mock('ErrorBag');
+        $errorBag = m::mock('ErrorBag');
 
         App::shouldReceive('make')
             ->with('validator')
             ->andReturn($laravelValidator);
 
-        $validator = new UserValidator;
+        $validator = new UserValidator();
 
         $userA = m::mock('Zizaco\Confide\ConfideUserInterface');
         $userB = m::mock('Zizaco\Confide\ConfideUserInterface');
@@ -223,7 +225,7 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
         */
 
         $userA->shouldReceive('toArray')
-            ->andReturn(['username'=>'foo']);
+            ->andReturn(['username' => 'foo']);
 
         // Password must be retrieved separately since it may
         // be hidden from toArray method.
@@ -231,21 +233,21 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
             ->andReturn('secret');
 
         $userB->shouldReceive('toArray')
-            ->andReturn(['username'=>'bar']);
+            ->andReturn(['username' => 'bar']);
 
         $userB->shouldReceive('getAuthPassword')
             ->andReturn('p@ss');
 
         $laravelValidator->shouldReceive('make')
             ->with(
-                ['username'=>'foo', 'password'=>'secret'],
+                ['username' => 'foo', 'password' => 'secret'],
                 $validator->rules['create']
             )
             ->once()->andReturn($laravelValidator);
 
         $laravelValidator->shouldReceive('make')
             ->with(
-                ['username'=>'bar', 'password'=>'p@ss'],
+                ['username' => 'bar', 'password' => 'p@ss'],
                 $validator->rules['create']
             )
             ->once()->andReturn($laravelValidator);
@@ -279,7 +281,7 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
             ->with('Illuminate\Support\MessageBag')
             ->andReturn($errorBag);
 
-        $validator = new UserValidator;
+        $validator = new UserValidator();
         $user = m::mock('Zizaco\Confide\ConfideUserInterface');
         $user->errors = null;
 
@@ -318,7 +320,7 @@ class UserValidatorTest extends PHPUnit_Framework_TestCase
             ->with('Illuminate\Support\MessageBag')
             ->never();
 
-        $validator = new UserValidator;
+        $validator = new UserValidator();
         $user = m::mock('Zizaco\Confide\ConfideUserInterface');
         $user->errors = $errorBag;
 

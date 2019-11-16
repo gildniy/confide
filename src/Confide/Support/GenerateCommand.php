@@ -1,4 +1,6 @@
-<?php namespace Zizaco\Confide\Support;
+<?php
+
+namespace Zizaco\Confide\Support;
 
 use Illuminate\Console\Command;
 
@@ -7,7 +9,6 @@ use Illuminate\Console\Command;
  * behaviors for the confide commands that generates files.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 abstract class GenerateCommand extends Command
 {
@@ -27,8 +28,9 @@ abstract class GenerateCommand extends Command
      */
     public function __construct($app = null)
     {
-        if (!is_array($app))
+        if (!is_array($app)) {
             parent::__construct();
+        }
 
         $this->app = $app;
     }
@@ -47,7 +49,7 @@ abstract class GenerateCommand extends Command
         $output = $this->app['view']->make('confide::'.$view, $viewVars)
             ->render();
 
-        $filename = $this->app['path'].'/'.trim($filename,'/');
+        $filename = $this->app['path'].'/'.trim($filename, '/');
         $directory = dirname($filename);
 
         $this->makeDir($directory, 0755, true);
@@ -71,7 +73,7 @@ abstract class GenerateCommand extends Command
         $output = $this->app['view']->make('confide::'.$view, $viewVars)
             ->render();
 
-        $filename = $this->app['path'].'/'.trim($filename,'/');
+        $filename = $this->app['path'].'/'.trim($filename, '/');
         $directory = dirname($filename);
 
         $this->makeDir($directory, 0755, true);

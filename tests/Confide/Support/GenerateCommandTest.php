@@ -1,14 +1,14 @@
-<?php namespace Zizaco\Confide\Support;
+<?php
+
+namespace Zizaco\Confide\Support;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class GenerateCommandTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -25,16 +25,16 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $config = m::mock('Config');
         $view = m::mock('View');
         $app = [
-            'config'=>$config,
-            'view'=>$view,
-            'path'=>'/where/the/app/is',
+            'config' => $config,
+            'view'   => $view,
+            'path'   => '/where/the/app/is',
         ];
         $command = m::mock('Zizaco\Confide\Support\_GenerateCommandStub[makeDir,filePutContents]', [$app]);
         $command->shouldAllowMockingProtectedMethods();
         $filename = 'path/to/file.php';
         $viewName = 'generate.my_view';
         $viewVars = [
-            'someVar' => 'someValue'
+            'someVar' => 'someValue',
         ];
 
         /*
@@ -55,12 +55,12 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
             ->passthru();
 
         $command->shouldReceive('makeDir')
-            ->with("/where/the/app/is/path/to", 493, true)
+            ->with('/where/the/app/is/path/to', 493, true)
             ->once()
             ->andReturn(true);
 
         $command->shouldReceive('filePutContents')
-            ->with("/where/the/app/is/path/to/file.php", "The rendered content")
+            ->with('/where/the/app/is/path/to/file.php', 'The rendered content')
             ->once()
             ->andReturn(true);
 
@@ -82,16 +82,16 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
         $config = m::mock('Config');
         $view = m::mock('View');
         $app = [
-            'config'=>$config,
-            'view'=>$view,
-            'path'=>'/where/the/app/is',
+            'config' => $config,
+            'view'   => $view,
+            'path'   => '/where/the/app/is',
         ];
         $command = m::mock('Zizaco\Confide\Support\_GenerateCommandStub[makeDir,filePutContents]', [$app]);
         $command->shouldAllowMockingProtectedMethods();
         $filename = 'path/to/file.php';
         $viewName = 'generate.my_view';
         $viewVars = [
-            'someVar' => 'someValue'
+            'someVar' => 'someValue',
         ];
 
         /*
@@ -112,12 +112,12 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
             ->passthru();
 
         $command->shouldReceive('makeDir')
-            ->with("/where/the/app/is/path/to", 493, true)
+            ->with('/where/the/app/is/path/to', 493, true)
             ->once()
             ->andReturn(true);
 
         $command->shouldReceive('filePutContents')
-            ->with("/where/the/app/is/path/to/file.php", "The rendered content", 8)
+            ->with('/where/the/app/is/path/to/file.php', 'The rendered content', 8)
             ->once()
             ->andReturn(true);
 
@@ -131,11 +131,10 @@ class GenerateCommandTest extends PHPUnit_Framework_TestCase
 }
 
 /**
- * A stub class that extends GenerateCommand
+ * A stub class that extends GenerateCommand.
  *
  * @see \Zizaco\Confide\Support\GenerateCommand
  */
 class _GenerateCommandStub extends GenerateCommand
 {
-
 }

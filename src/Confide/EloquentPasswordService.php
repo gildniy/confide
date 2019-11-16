@@ -1,15 +1,16 @@
-<?php namespace Zizaco\Confide;
+<?php
 
+namespace Zizaco\Confide;
+
+use Config;
+use DB;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Foundation\Application;
-use DB;
-use Config;
 
 /**
  * A service that abstracts all user password management related methods.
  *
  * @license MIT
- * @package Zizaco\Confide
  */
 class EloquentPasswordService implements PasswordServiceInterface
 {
@@ -44,11 +45,11 @@ class EloquentPasswordService implements PasswordServiceInterface
         $email = $user->getReminderEmail();
         $token = $this->generateToken();
 
-        $values = array(
-            'email'=> $email,
-            'token'=> $token,
-            'created_at'=> new \DateTime
-        );
+        $values = [
+            'email'      => $email,
+            'token'      => $token,
+            'created_at' => new \DateTime(),
+        ];
 
         $table = $this->getTable();
 
@@ -91,7 +92,7 @@ class EloquentPasswordService implements PasswordServiceInterface
      *
      * @param string $token
      *
-     * @return boolean Success.
+     * @return bool Success.
      */
     public function destroyToken($token)
     {
@@ -169,7 +170,7 @@ class EloquentPasswordService implements PasswordServiceInterface
     protected function sendEmail($user, $token)
     {
         $config = $this->app->make('config');
-        $lang   = $this->app->make('translator');
+        $lang = $this->app->make('translator');
 
         $this->app->make('mailer')->queueOn(
             $config->get('confide.email_queue'),

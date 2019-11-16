@@ -1,7 +1,9 @@
-<?php namespace Zizaco\Confide;
+<?php
 
-use Zizaco\Confide\Support\GenerateCommand;
+namespace Zizaco\Confide;
+
 use Symfony\Component\Console\Input\InputOption;
+use Zizaco\Confide\Support\GenerateCommand;
 
 /**
  * This command renders the package view generator.contoller and also
@@ -9,7 +11,6 @@ use Symfony\Component\Console\Input\InputOption;
  * in order to save some time.
  *
  * @license MIT
- * @package  Zizaco\Confide
  */
 class ControllerCommand extends GenerateCommand
 {
@@ -34,11 +35,11 @@ class ControllerCommand extends GenerateCommand
      */
     protected function getOptions()
     {
-        return array(
-            array('name', null, InputOption::VALUE_OPTIONAL, 'Name of the controller.', 'Users'),
-            array('--restful', '-r', InputOption::VALUE_NONE, 'Generate RESTful controller.'),
-            array('username', null, InputOption::VALUE_NONE, 'Includes username as a required parameter.'),
-        );
+        return [
+            ['name', null, InputOption::VALUE_OPTIONAL, 'Name of the controller.', 'Users'],
+            ['--restful', '-r', InputOption::VALUE_NONE, 'Generate RESTful controller.'],
+            ['username', null, InputOption::VALUE_NONE, 'Includes username as a required parameter.'],
+        ];
     }
 
     /**
@@ -65,12 +66,12 @@ class ControllerCommand extends GenerateCommand
         $this->line('');
         $this->info("Controller name: $class".(($restful) ? "\nRESTful: Yes" : ''));
         $this->comment(
-            "An authentication ".(($restful) ? 'RESTful ' : '')."controller template with the name ".
-            ($namespace ? $namespace.'\\' : '')."$class.php"." will be created in app/controllers directory"
+            'An authentication '.(($restful) ? 'RESTful ' : '').'controller template with the name '.
+            ($namespace ? $namespace.'\\' : '')."$class.php".' will be created in app/controllers directory'
         );
         $this->line('');
 
-        if ($this->confirm("Proceed with the controller creation? [Yes|no]")) {
+        if ($this->confirm('Proceed with the controller creation? [Yes|no]')) {
             $this->info("Creating $class...");
             // Generate
             $filename = 'controllers/'.($namespace ? str_replace('\\', '/', $namespace).'/' : '').$class.'.php';
@@ -99,7 +100,7 @@ class ControllerCommand extends GenerateCommand
             $name = array_pop($name);
         }
 
-        $name = ( $name != '') ? ucfirst($name) : 'Users';
+        $name = ($name != '') ? ucfirst($name) : 'Users';
 
         if (substr(strtolower($name), -10) == 'controller') {
             $name = substr($name, 0, -10).'Controller';

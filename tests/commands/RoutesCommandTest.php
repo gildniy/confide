@@ -1,21 +1,22 @@
-<?php namespace Zizaco\Confide;
+<?php
+
+namespace Zizaco\Confide;
 
 use Mockery as m;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
 
 class RoutesCommandTest extends PHPUnit_Framework_TestCase
 {
     /**
-     * ConfideRepository instance
+     * ConfideRepository instance.
      *
      * @var Zizaco\Confide\ConfideRepository
      */
     protected $repo;
 
     /**
-     * Calls Mockery::close
+     * Calls Mockery::close.
      */
     public function tearDown()
     {
@@ -56,8 +57,8 @@ class RoutesCommandTest extends PHPUnit_Framework_TestCase
         $command->shouldAllowMockingProtectedMethods();
         $viewVars = [
             'controllerName' => 'UsersController',
-            'url' => 'users',
-            'restful' => true
+            'url'            => 'users',
+            'restful'        => true,
         ];
 
         /*
@@ -75,7 +76,7 @@ class RoutesCommandTest extends PHPUnit_Framework_TestCase
 
         $command->shouldReceive('getFireMessage')
             ->once()
-            ->andReturn("Some message about appending the routes...");
+            ->andReturn('Some message about appending the routes...');
 
         $command->shouldReceive('fire')
             ->passthru();
